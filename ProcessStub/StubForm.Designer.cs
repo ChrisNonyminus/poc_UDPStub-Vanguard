@@ -1,4 +1,4 @@
-namespace ProcessStub
+namespace UDPStub
 {
     partial class StubForm
     {
@@ -29,8 +29,8 @@ namespace ProcessStub
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StubForm));
-            this.label5 = new System.Windows.Forms.Label();
             this.pnTarget = new System.Windows.Forms.Panel();
+            this.btnStartClient = new System.Windows.Forms.Button();
             this.btnConnect = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.tbClientAddr = new System.Windows.Forms.TextBox();
@@ -43,21 +43,11 @@ namespace ProcessStub
             this.btnRefreshDomains = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.btnStartClient = new System.Windows.Forms.Button();
+            this.placeholderComboBox = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.pnTarget.SuspendLayout();
             this.pnSideBar.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(131, 26);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(88, 15);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Selected Target";
             // 
             // pnTarget
             // 
@@ -74,6 +64,25 @@ namespace ProcessStub
             this.pnTarget.TabIndex = 13;
             this.pnTarget.Tag = "color:dark1";
             // 
+            // btnStartClient
+            // 
+            this.btnStartClient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStartClient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.btnStartClient.FlatAppearance.BorderSize = 0;
+            this.btnStartClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStartClient.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.btnStartClient.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnStartClient.Location = new System.Drawing.Point(3, 96);
+            this.btnStartClient.Name = "btnStartClient";
+            this.btnStartClient.Size = new System.Drawing.Size(103, 23);
+            this.btnStartClient.TabIndex = 180;
+            this.btnStartClient.TabStop = false;
+            this.btnStartClient.Tag = "color:dark2";
+            this.btnStartClient.Text = "Start";
+            this.btnStartClient.UseVisualStyleBackColor = false;
+            this.btnStartClient.Visible = false;
+            this.btnStartClient.Click += new System.EventHandler(this.btnStartClient_Click);
+            // 
             // btnConnect
             // 
             this.btnConnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -82,7 +91,7 @@ namespace ProcessStub
             this.btnConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConnect.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.btnConnect.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnConnect.Location = new System.Drawing.Point(244, 32);
+            this.btnConnect.Location = new System.Drawing.Point(256, 96);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(103, 23);
             this.btnConnect.TabIndex = 179;
@@ -90,6 +99,7 @@ namespace ProcessStub
             this.btnConnect.Tag = "color:dark2";
             this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = false;
+            this.btnConnect.Visible = false;
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
             // label3
@@ -104,6 +114,7 @@ namespace ProcessStub
             this.label3.Size = new System.Drawing.Size(81, 13);
             this.label3.TabIndex = 178;
             this.label3.Text = "Client Address";
+            this.label3.Visible = false;
             // 
             // tbClientAddr
             // 
@@ -118,6 +129,7 @@ namespace ProcessStub
             this.tbClientAddr.Size = new System.Drawing.Size(148, 21);
             this.tbClientAddr.TabIndex = 177;
             this.tbClientAddr.Tag = "color:dark2";
+            this.tbClientAddr.Visible = false;
             this.tbClientAddr.TextChanged += new System.EventHandler(this.tbClientAddr_TextChanged);
             // 
             // btnTargetSettings
@@ -163,9 +175,10 @@ namespace ProcessStub
             this.label4.Size = new System.Drawing.Size(102, 171);
             this.label4.TabIndex = 124;
             this.label4.Tag = "";
-            this.label4.Text = "Don\'t be stupid. Don\'t corrupt Linux, don\'t corrupt online games, anything that u" +
-    "ses online services.\r\n\r\nRun this in a VM or other virutalized Linux environment " +
-    "for maximum safety.";
+            this.label4.Text = "Don\'t be stupid. Don\'t corrupt the OS of whatever machine you\'re corrupting, don\'" +
+    "t corrupt online games, anything that uses online services.\r\n\r\nRun clients in a " +
+    "VM for maximum safety.";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // lbTargetStatus
             // 
@@ -214,6 +227,7 @@ namespace ProcessStub
             this.btnRefreshDomains.Tag = "color:dark2";
             this.btnRefreshDomains.Text = "Refresh Domains";
             this.btnRefreshDomains.UseVisualStyleBackColor = false;
+            this.btnRefreshDomains.Visible = false;
             this.btnRefreshDomains.Click += new System.EventHandler(this.BtnRefreshDomains_Click);
             // 
             // label1
@@ -225,9 +239,10 @@ namespace ProcessStub
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(131, 216);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(148, 13);
+            this.label1.Size = new System.Drawing.Size(149, 13);
             this.label1.TabIndex = 178;
-            this.label1.Text = "Windows Side\'s IP Address:";
+            this.label1.Text = "This Side\'s Local IP Address:";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label7
             // 
@@ -243,23 +258,33 @@ namespace ProcessStub
             this.label7.Text = "ipplaceholder";
             this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
-            // btnStartClient
+            // placeholderComboBox
             // 
-            this.btnStartClient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStartClient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.btnStartClient.FlatAppearance.BorderSize = 0;
-            this.btnStartClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStartClient.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.btnStartClient.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnStartClient.Location = new System.Drawing.Point(3, 96);
-            this.btnStartClient.Name = "btnStartClient";
-            this.btnStartClient.Size = new System.Drawing.Size(103, 23);
-            this.btnStartClient.TabIndex = 180;
-            this.btnStartClient.TabStop = false;
-            this.btnStartClient.Tag = "color:dark2";
-            this.btnStartClient.Text = "Start";
-            this.btnStartClient.UseVisualStyleBackColor = false;
-            this.btnStartClient.Click += new System.EventHandler(this.btnStartClient_Click);
+            this.placeholderComboBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
+            this.placeholderComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.placeholderComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.placeholderComboBox.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.placeholderComboBox.ForeColor = System.Drawing.Color.White;
+            this.placeholderComboBox.FormattingEnabled = true;
+            this.placeholderComboBox.Items.AddRange(new object[] {
+            "Linux machine"});
+            this.placeholderComboBox.Location = new System.Drawing.Point(244, 20);
+            this.placeholderComboBox.Name = "placeholderComboBox";
+            this.placeholderComboBox.Size = new System.Drawing.Size(206, 21);
+            this.placeholderComboBox.TabIndex = 179;
+            this.placeholderComboBox.Tag = "color:normal";
+            this.placeholderComboBox.SelectedIndexChanged += new System.EventHandler(this.placeholderComboBox_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(198, 23);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(37, 13);
+            this.label5.TabIndex = 178;
+            this.label5.Text = "Mode";
             // 
             // StubForm
             // 
@@ -267,19 +292,20 @@ namespace ProcessStub
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(500, 261);
+            this.Controls.Add(this.placeholderComboBox);
             this.Controls.Add(this.btnTargetSettings);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.btnRefreshDomains);
             this.Controls.Add(this.pnSideBar);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pnTarget);
-            this.Controls.Add(this.label5);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(516, 300);
             this.Name = "StubForm";
             this.Tag = "color:dark2";
-            this.Text = "Linux Stub - Windows Side";
+            this.Text = "UDP Stub - Server Side";
             this.pnTarget.ResumeLayout(false);
             this.pnTarget.PerformLayout();
             this.pnSideBar.ResumeLayout(false);
@@ -290,7 +316,6 @@ namespace ProcessStub
         }
 
         #endregion
-        public System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel pnTarget;
         public System.Windows.Forms.Button btnTargetSettings;
         private System.Windows.Forms.Panel pnSideBar;
@@ -305,6 +330,8 @@ namespace ProcessStub
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnStartClient;
+        public System.Windows.Forms.ComboBox placeholderComboBox;
+        private System.Windows.Forms.Label label5;
     }
 }
 

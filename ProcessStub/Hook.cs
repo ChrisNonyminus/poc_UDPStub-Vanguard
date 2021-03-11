@@ -1,4 +1,4 @@
-namespace ProcessStub
+namespace UDPStub
 {
     using System;
     using System.Collections.Generic;
@@ -16,7 +16,7 @@ namespace ProcessStub
 
     public static class Hook
     {
-        public static string ProcessStubVersion = "0.0.1";
+        public static string UDPStubVersion = "0.0.1";
         public static string currentDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
         public static Process p;
         public static bool UseFiltering = true;
@@ -49,7 +49,7 @@ namespace ProcessStub
             if (VanguardCore.vanguardConnected)
                 UpdateDomains();
 
-            //ProcessWatch.currentFileInfo = new ProcessStubFileInfo();
+            //ProcessWatch.currentFileInfo = new UDPStubFileInfo();
 
             DisableInterface();
             RtcCore.EmuDirOverride = true; //allows the use of this value before vanguard is connected
@@ -59,29 +59,6 @@ namespace ProcessStub
             if (!Directory.Exists(paramsPath))
                 Directory.CreateDirectory(paramsPath);
 
-            if (!Params.IsParamSet("DISCLAIMERREAD"))
-            {
-                var disclaimer = $@"Welcome to Linux Stub
-Version {Hook.ProcessStubVersion} - Windows Side.
-
-To open the Linux Side, put the .out file in your Linux environment, in a folder where you can easily access it. Open that folder in the distro's terminal (or just cd to it in the shell) and type ./LinuxStubLinuxSide.out
-
-Disclaimer:
-This program comes with absolutely ZERO warranty.
-You may use it at your own risk.
-Be EXTREMELY careful with what you choose to corrupt.
-Be aware there is always the chance of damage.
-
-This program inserts random data in hooked processes. There is no way to accurately predict what can happen out of this.
-The developers of this software will not be held responsible for any damage caused
-as the result of use of this software.
-
-By clicking 'Yes' you agree that you have read this warning in full and are aware of any potential consequences of use of the program. If you do not agree, click 'No' to exit this software.";
-                if (MessageBox.Show(disclaimer, "Linux Stub", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
-                    Environment.Exit(0);
-
-                Params.SetParam("DISCLAIMERREAD");
-            }
 
             var protectionMode = Params.ReadParam("PROTECTIONMODE");
             try

@@ -11,6 +11,7 @@
 #include <iostream>
 #include <sstream>
 #include <Proc.h>
+#include <cstddef>
 //thx https://www.geeksforgeeks.org/udp-server-client-implementation-c/
 #define PORT 42042
 #define MAXLINE 1024
@@ -68,7 +69,10 @@ void UDPConnector::Connect()
 }
 std::string UDPConnector::Recieve()
 {
-    int n = recvfrom(sockfd, (char*)buffer, MAXLINE, MSG_WAITALL, (struct sockaddr*)&servaddr, &len);
+    int len;
+    len = sizeof(servaddr);
+    //int n = recvfrom(sockfd, buffer, MAXLINE, 0, (struct sockaddr*)&servaddr, (socklen_t*)&len);
+    int n = recv(sockfd, buffer, MAXLINE, 0);
     buffer[n] = '\0';
     printf("recvfrom returns %i : %s\n", n, buffer);
     return buffer;
@@ -89,8 +93,9 @@ void UDPConnector::ExecuteCommand()
     std::string arg2 = "";
     std::string arg3 = "";
     std::string arg4 = "";
+    printf("Waitin\' for command...\n");
     std::string cmd = Recieve();
-    printf(cmd.c_str());
+    printf("%s\n", cmd.c_str());
     //thanks https://stackoverflow.com/questions/14265581/parse-split-a-string-in-c-using-string-delimiter-standard-c
     if (cmd.find("read8") != std::string::npos)
     {

@@ -1,12 +1,12 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ProcessStub-Vanguard")]
-[assembly: AssemblyDescription("Process Corruption stub for RTCV. https://github.com/NarryG/ProcessStub-Vanguard")]
+[assembly: AssemblyTitle("UDPStub-Vanguard")]
+[assembly: AssemblyDescription("Process Corruption stub for RTCV. https://github.com/NarryG/UDPStub-Vanguard")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Redscientist Media")]
 [assembly: AssemblyProduct("RTCV")]

@@ -5,7 +5,7 @@ namespace Vanguard
     using System.Reflection;
     using System.Threading;
     using System.Windows.Forms;
-    using ProcessStub;
+    using UDPStub;
     using RTCV.Common;
     using RTCV.CorruptCore;
     using RTCV.NetCore;
@@ -118,7 +118,7 @@ namespace Vanguard
         {
             var partial = new PartialSpec("VanguardSpec");
 
-            partial[VSPEC.NAME] = "LinuxStub";
+            partial[VSPEC.NAME] = "UDPStub";
             partial[VSPEC.SYSTEM] = "Linux";
             partial[VSPEC.GAMENAME] = string.Empty;
             partial[VSPEC.SYSTEMPREFIX] = string.Empty;

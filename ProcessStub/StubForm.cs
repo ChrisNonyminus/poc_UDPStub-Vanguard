@@ -1,4 +1,4 @@
-namespace ProcessStub
+namespace UDPStub
 {
     using System;
     using System.Drawing;
@@ -34,7 +34,31 @@ namespace ProcessStub
             SyncObjectSingleton.SyncObject = this;
             label7.Text = localIP;
             
-            Text += " " + Hook.ProcessStubVersion;
+            Text += " " + Hook.UDPStubVersion;
+
+            if (!Params.IsParamSet("DISCLAIMERREAD"))
+            {
+                var disclaimer = $@"Welcome to UDP Stub
+Version {Hook.UDPStubVersion}.
+
+Read the enclosed instruction book... readme to see how to use this thing.
+
+Disclaimer:
+This program comes with absolutely ZERO warranty.
+You may use it at your own risk.
+Be EXTREMELY careful with what you choose to corrupt.
+Be aware there is always the chance of damage.
+
+This program inserts random data in hooked processes. There is no way to accurately predict what can happen out of this.
+The developers of this software will not be held responsible for any damage caused
+as the result of use of this software.
+
+By clicking 'Yes' you agree that you have read this warning in full and are aware of any potential consequences of use of the program. If you do not agree, click 'No' to exit this software.";
+                if (MessageBox.Show(disclaimer, "UDP Stub", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
+                    Environment.Exit(0);
+
+                Params.SetParam("DISCLAIMERREAD");
+            }
         }
 
         private void StubForm_Load(object sender, EventArgs e)
@@ -190,7 +214,7 @@ namespace ProcessStub
         private void btnConnect_Click(object sender, EventArgs e)
         {
             Connector.InitializeConnector();
-
+            btnStartClient.Visible = true;
 
         }
 
@@ -209,6 +233,27 @@ namespace ProcessStub
         {
             Hook.Start();
             VanguardCore.Start();
+            btnRefreshDomains.Visible = true;
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void placeholderComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(placeholderComboBox.SelectedItem.Equals("Linux machine"))
+            {
+                btnConnect.Visible = true;
+                label3.Visible = true;
+                tbClientAddr.Visible = true;
+            }
         }
 
 

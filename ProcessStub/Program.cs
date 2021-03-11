@@ -1,4 +1,4 @@
-﻿namespace ProcessStub
+namespace UDPStub
 {
     using System;
     using System.IO;

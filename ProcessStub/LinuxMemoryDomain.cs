@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using RTCV.CorruptCore;
 
-namespace ProcessStub
+namespace UDPStub
 {
     class LinuxMemoryDomain : IMemoryDomain
     {

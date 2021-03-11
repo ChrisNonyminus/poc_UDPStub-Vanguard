@@ -8,3 +8,5 @@ packages/*
 /LinuxSideProgramCPlusPlus/obj/x64/Release
 /LinuxSideProgramCPlusPlus/bin/x64/Release
 /LinuxSideProgram/obj
+/UDPStubWindowsClient/bin/Debug
+/UDPStubWindowsClient

@@ -9,7 +9,7 @@ using RTCV.Common;
 using RTCV.NetCore;
 using RTCV.UI;
 //thx https://gist.github.com/darkguy2008/413a6fea3a5b4e67e5e0d96f750088a9
-namespace ProcessStub
+namespace UDPStub
 {
     public class UDPSocket
     {
@@ -17,7 +17,9 @@ namespace ProcessStub
         private const int bufSize = 8 * 1024;
         private State state = new State();
         private EndPoint epFrom = new IPEndPoint(IPAddress.Any, 0);
+        public EndPoint epTo;
         private AsyncCallback recv = null;
+        private AsyncCallback snd = null;
 
         public class State
         {
@@ -40,12 +42,14 @@ namespace ProcessStub
         public void Send(string text)
         {
             byte[] data = Encoding.ASCII.GetBytes(text);
-            _socket.BeginSend(data, 0, data.Length, SocketFlags.None, (ar) =>
-            {
-                State so = (State)ar.AsyncState;
-                int bytes = _socket.EndSend(ar);
-                Console.WriteLine("SEND: {0}, {1}", bytes, text);
-            }, state);
+            //_socket.BeginSend(data, 0, data.Length, SocketFlags.None, (ar) =>
+            //{
+            //    State so = (State)ar.AsyncState;
+            //    int bytes = _socket.EndSend(ar);
+            //    Console.WriteLine("SEND: {0}, {1}", bytes, text);
+            //}, state);
+            int n = _socket.SendTo(data, 0, data.Length, SocketFlags.None, this.epTo);
+            Console.WriteLine("SENT: \"{0} , {1}\" to {2}", n, text, epTo.ToString());
         }
         public String Receive()
         {
@@ -65,12 +69,15 @@ namespace ProcessStub
     public class Connector
     {
         public static UDPSocket c;
+        public static UDPSocket s;
         public static void InitializeConnector()
         {
-            UDPSocket s = new UDPSocket();
+            s = new UDPSocket();
             s.Server(S.GET<StubForm>().localIP, 42042);
             c = new UDPSocket();
             c.Client(S.GET<StubForm>().tbClientAddr.Text, 42042);
+            c.epTo = new IPEndPoint(IPAddress.Parse(S.GET<StubForm>().tbClientAddr.Text), 42042);
+            Console.WriteLine("Connected to {0}", c.epTo.ToString());
             c.Send("Windows: Howdy!");
         }
         public static void SendMessage(String text)
