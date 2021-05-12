@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("UDPStub")]
+[assembly: AssemblyTitle("NetStub")]
 [assembly: AssemblyDescription("Bridge between Cemu Emulator and RTC")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Redscientist Media")]
-[assembly: AssemblyProduct("UDPStub")]
+[assembly: AssemblyProduct("NetStub")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

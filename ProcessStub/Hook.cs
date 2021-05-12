@@ -1,4 +1,4 @@
-namespace UDPStub
+namespace NetStub
 {
     using System;
     using System.Collections.Generic;
@@ -16,8 +16,11 @@ namespace UDPStub
 
     public static class Hook
     {
-        public static string UDPStubVersion = "0.0.1";
+        public static string NetStubVersion = "0.0.2";
         public static string currentDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+        public static string ProtocolType = "UDP";
+        public static string NetStubMode = "Linux";
+        public static bool PS3_AccessProcess = false;
         public static Process p;
         public static bool UseFiltering = true;
         public static bool UseExceptionHandler = false;
@@ -49,7 +52,7 @@ namespace UDPStub
             if (VanguardCore.vanguardConnected)
                 UpdateDomains();
 
-            //ProcessWatch.currentFileInfo = new UDPStubFileInfo();
+            //ProcessWatch.currentFileInfo = new NetStubFileInfo();
 
             DisableInterface();
             RtcCore.EmuDirOverride = true; //allows the use of this value before vanguard is connected
@@ -277,14 +280,28 @@ namespace UDPStub
             try
             {
                 PartialSpec gameDone = new PartialSpec("VanguardSpec");
-                gameDone[VSPEC.SYSTEM] = "Linux";
-                gameDone[VSPEC.GAMENAME] = "IGNORE";
-                gameDone[VSPEC.SYSTEMPREFIX] = "Linux";
-                gameDone[VSPEC.SYSTEMCORE] = "Linux";
-                gameDone[VSPEC.OPENROMFILENAME] = "IGNORE";
-                gameDone[VSPEC.MEMORYDOMAINS_BLACKLISTEDDOMAINS] = Array.Empty<string>();
-                gameDone[VSPEC.MEMORYDOMAINS_INTERFACES] = GetInterfaces();
-                gameDone[VSPEC.CORE_DISKBASED] = false;
+                if (NetStubMode == "Linux")
+                {
+                    gameDone[VSPEC.SYSTEM] = "Linux";
+                    gameDone[VSPEC.GAMENAME] = "IGNORE";
+                    gameDone[VSPEC.SYSTEMPREFIX] = "Linux";
+                    gameDone[VSPEC.SYSTEMCORE] = "Linux";
+                    gameDone[VSPEC.OPENROMFILENAME] = "IGNORE";
+                    gameDone[VSPEC.MEMORYDOMAINS_BLACKLISTEDDOMAINS] = Array.Empty<string>();
+                    gameDone[VSPEC.MEMORYDOMAINS_INTERFACES] = GetInterfaces();
+                    gameDone[VSPEC.CORE_DISKBASED] = false;
+                }
+                if (NetStubMode == "PS3")
+                {
+                    gameDone[VSPEC.SYSTEM] = "PS3";
+                    gameDone[VSPEC.GAMENAME] = "IGNORE";
+                    gameDone[VSPEC.SYSTEMPREFIX] = "PS3";
+                    gameDone[VSPEC.SYSTEMCORE] = "PS3";
+                    gameDone[VSPEC.OPENROMFILENAME] = "IGNORE";
+                    gameDone[VSPEC.MEMORYDOMAINS_BLACKLISTEDDOMAINS] = Array.Empty<string>();
+                    gameDone[VSPEC.MEMORYDOMAINS_INTERFACES] = GetInterfaces();
+                    gameDone[VSPEC.CORE_DISKBASED] = false;
+                }
                 AllSpec.VanguardSpec.Update(gameDone);
 
                 //This is local. If the domains changed it propgates over netcore
@@ -305,20 +322,39 @@ namespace UDPStub
             String connectormessage = "";
             try
             {
-                Console.WriteLine($"getInterfaces()");
-                List<MemoryDomainProxy> interfaces = new List<MemoryDomainProxy>();
-                Connector.SendMessage("GetMaxMaps");
-                connectormessage = Connector.RecMessage();
-                int maxmaps = int.Parse(connectormessage.Substring(connectormessage.IndexOf("GetMaxMaps: ")));
-                Console.WriteLine("Max amount of maps is " + maxmaps);
-                for (int i = 0; i <= maxmaps; i++)
+                if (NetStubMode == "Linux")
                 {
-                    LinuxMemoryDomain lmd = new LinuxMemoryDomain(i);
-                    interfaces.Add(new MemoryDomainProxy(lmd));
+                    Console.WriteLine($"getInterfaces()");
+                    List<MemoryDomainProxy> interfaces = new List<MemoryDomainProxy>();
+                    Connector.SendMessage("GetMaxMaps");
+                    connectormessage = Connector.RecMessage();
+                    int maxmaps = int.Parse(connectormessage.Substring(connectormessage.IndexOf("GetMaxMaps: ")));
+                    Console.WriteLine("Max amount of maps is " + maxmaps);
+                    for (int i = 0; i <= maxmaps; i++)
+                    {
+                        LinuxMemoryDomain lmd = new LinuxMemoryDomain(i);
+                        interfaces.Add(new MemoryDomainProxy(lmd));
+                    }
+                    Console.WriteLine("Done adding domains");
+                    Thread.Sleep(1000);
+                    return interfaces.ToArray();
                 }
-                Console.WriteLine("Done adding domains");
-                Thread.Sleep(1000);
-                return interfaces.ToArray();
+                if (NetStubMode == "PS3")
+                {
+                    Console.WriteLine($"getInterfaces()");
+                    List<MemoryDomainProxy> interfaces = new List<MemoryDomainProxy>();
+                    PS3_LV2MemoryDomain lv2 = new PS3_LV2MemoryDomain();
+                    if (PS3_AccessProcess == true) 
+                    { 
+                        PS3_ProcessMemoryDomain proc = new PS3_ProcessMemoryDomain(); 
+                        interfaces.Add(new MemoryDomainProxy(proc));
+                    }
+                    interfaces.Add(new MemoryDomainProxy(lv2));
+                    Console.WriteLine("Done adding domains");
+                    Thread.Sleep(1000);
+                    return interfaces.ToArray();
+                }
+                return null;
             }
             catch
             {

@@ -3,7 +3,7 @@ namespace Vanguard
     using System;
     using System.Threading;
     using System.Windows.Forms;
-    using UDPStub;
+    using NetStub;
     using RTCV.CorruptCore;
     using RTCV.NetCore;
     //using RTCV.ProcessCorrupt;

@@ -1,4 +1,4 @@
-namespace UDPStub
+namespace NetStub
 {
     using System;
     using System.IO;

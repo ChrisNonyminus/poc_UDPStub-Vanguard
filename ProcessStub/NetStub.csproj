@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{BFDEF493-3173-4FBC-A789-F208953DF30C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ProcessStub</RootNamespace>
-    <AssemblyName>ProcessStub</AssemblyName>
+    <RootNamespace>NetStub</RootNamespace>
+    <AssemblyName>NetStub</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -75,6 +75,7 @@
       <DependentUpon>HookProcessForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Hook.cs" />
+    <Compile Include="PS3MemoryDomain.cs" />
     <Compile Include="LinuxMemoryDomain.cs" />
     <Compile Include="StubForm.cs">
       <SubType>Form</SubType>

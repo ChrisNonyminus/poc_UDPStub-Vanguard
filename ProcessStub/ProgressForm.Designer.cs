@@ -1,4 +1,4 @@
-﻿namespace UDPStub
+﻿namespace NetStub
 {
     partial class ProgressForm
     {

@@ -1,4 +1,4 @@
-namespace UDPStub
+namespace NetStub
 {
     partial class StubForm
     {
@@ -45,6 +45,7 @@ namespace UDPStub
             this.label7 = new System.Windows.Forms.Label();
             this.placeholderComboBox = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.ps3_ProcCheckBox = new System.Windows.Forms.CheckBox();
             this.pnTarget.SuspendLayout();
             this.pnSideBar.SuspendLayout();
             this.SuspendLayout();
@@ -54,6 +55,7 @@ namespace UDPStub
             this.pnTarget.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnTarget.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.pnTarget.Controls.Add(this.ps3_ProcCheckBox);
             this.pnTarget.Controls.Add(this.btnStartClient);
             this.pnTarget.Controls.Add(this.btnConnect);
             this.pnTarget.Controls.Add(this.label3);
@@ -267,7 +269,8 @@ namespace UDPStub
             this.placeholderComboBox.ForeColor = System.Drawing.Color.White;
             this.placeholderComboBox.FormattingEnabled = true;
             this.placeholderComboBox.Items.AddRange(new object[] {
-            "Linux machine"});
+            "Linux machine",
+            "PS3 (WEBMAN MOD)"});
             this.placeholderComboBox.Location = new System.Drawing.Point(244, 20);
             this.placeholderComboBox.Name = "placeholderComboBox";
             this.placeholderComboBox.Size = new System.Drawing.Size(206, 21);
@@ -285,6 +288,19 @@ namespace UDPStub
             this.label5.Size = new System.Drawing.Size(37, 13);
             this.label5.TabIndex = 178;
             this.label5.Text = "Mode";
+            // 
+            // ps3_ProcCheckBox
+            // 
+            this.ps3_ProcCheckBox.AutoSize = true;
+            this.ps3_ProcCheckBox.ForeColor = System.Drawing.Color.White;
+            this.ps3_ProcCheckBox.Location = new System.Drawing.Point(137, 32);
+            this.ps3_ProcCheckBox.Name = "ps3_ProcCheckBox";
+            this.ps3_ProcCheckBox.Size = new System.Drawing.Size(210, 17);
+            this.ps3_ProcCheckBox.TabIndex = 181;
+            this.ps3_ProcCheckBox.Text = "(PS3) Access Process Memory Domain";
+            this.ps3_ProcCheckBox.UseVisualStyleBackColor = true;
+            this.ps3_ProcCheckBox.Visible = false;
+            this.ps3_ProcCheckBox.CheckedChanged += new System.EventHandler(this.ps3_ProcCheckBox_CheckedChanged);
             // 
             // StubForm
             // 
@@ -305,7 +321,8 @@ namespace UDPStub
             this.MinimumSize = new System.Drawing.Size(516, 300);
             this.Name = "StubForm";
             this.Tag = "color:dark2";
-            this.Text = "UDP Stub - Server Side";
+            this.Text = "Net Stub - Server Side";
+            this.Load += new System.EventHandler(this.StubForm_Load_1);
             this.pnTarget.ResumeLayout(false);
             this.pnTarget.PerformLayout();
             this.pnSideBar.ResumeLayout(false);
@@ -332,6 +349,7 @@ namespace UDPStub
         private System.Windows.Forms.Button btnStartClient;
         public System.Windows.Forms.ComboBox placeholderComboBox;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.CheckBox ps3_ProcCheckBox;
     }
 }
 

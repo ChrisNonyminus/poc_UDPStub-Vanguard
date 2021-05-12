@@ -1,4 +1,4 @@
-namespace UDPStub
+namespace NetStub
 {
     using System;
     using System.Drawing;
@@ -34,12 +34,12 @@ namespace UDPStub
             SyncObjectSingleton.SyncObject = this;
             label7.Text = localIP;
             
-            Text += " " + Hook.UDPStubVersion;
+            Text += " " + Hook.NetStubVersion;
 
             if (!Params.IsParamSet("DISCLAIMERREAD"))
             {
-                var disclaimer = $@"Welcome to UDP Stub
-Version {Hook.UDPStubVersion}.
+                var disclaimer = $@"Welcome to Net Stub
+Version {Hook.NetStubVersion}.
 
 Read the enclosed instruction book... readme to see how to use this thing.
 
@@ -54,7 +54,7 @@ The developers of this software will not be held responsible for any damage caus
 as the result of use of this software.
 
 By clicking 'Yes' you agree that you have read this warning in full and are aware of any potential consequences of use of the program. If you do not agree, click 'No' to exit this software.";
-                if (MessageBox.Show(disclaimer, "UDP Stub", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
+                if (MessageBox.Show(disclaimer, "Net Stub", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
                     Environment.Exit(0);
 
                 Params.SetParam("DISCLAIMERREAD");
@@ -248,12 +248,35 @@ By clicking 'Yes' you agree that you have read this warning in full and are awar
 
         private void placeholderComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(placeholderComboBox.SelectedItem.Equals("Linux machine"))
+            if (placeholderComboBox.SelectedItem.Equals("Linux machine"))
             {
                 btnConnect.Visible = true;
                 label3.Visible = true;
                 tbClientAddr.Visible = true;
+                Hook.NetStubMode = "Linux";
             }
+
+            if (placeholderComboBox.SelectedItem.Equals("PS3 (WEBMAN MOD)"))
+            {
+                btnConnect.Visible = true;
+                label3.Visible = true;
+                tbClientAddr.Visible = true;
+                ps3_ProcCheckBox.Visible = true;
+                Hook.NetStubMode = "PS3";
+            }
+
+        }
+
+        private void StubForm_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ps3_ProcCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ps3_ProcCheckBox.Checked == true)
+                Hook.PS3_AccessProcess = true;
+            else Hook.PS3_AccessProcess = false;
         }
 
 

@@ -10,3 +10,12 @@ packages/*
 /LinuxSideProgram/obj
 /UDPStubWindowsClient/bin/Debug
 /UDPStubWindowsClient
+UDPStubPS3Client-CELLSDK/NetStubPS3Client source code.7z
+UDPStubPS3Client-CELLSDK/objs/connector.ppu.o
+UDPStubPS3Client-CELLSDK/objs/connector.ppu.d
+UDPStubPS3Client-CELLSDK/objs/main.ppu.d
+UDPStubPS3Client-CELLSDK/objs/main.ppu.o
+UDPStubPS3Client-CELLSDK/objs/ps3mapi_func.ppu.d
+UDPStubPS3Client-CELLSDK/objs/ps3mapi_func.ppu.o
+UDPStubPS3Client-CELLSDK/objs/ps3mapi_ps3_lib.ppu.d
+UDPStubPS3Client-CELLSDK/objs/ps3mapi_ps3_lib.ppu.o

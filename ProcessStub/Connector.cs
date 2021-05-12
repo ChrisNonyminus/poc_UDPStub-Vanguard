@@ -9,7 +9,7 @@ using RTCV.Common;
 using RTCV.NetCore;
 using RTCV.UI;
 //thx https://gist.github.com/darkguy2008/413a6fea3a5b4e67e5e0d96f750088a9
-namespace UDPStub
+namespace NetStub
 {
     public class UDPSocket
     {
@@ -28,14 +28,16 @@ namespace UDPStub
 
         public void Server(string address, int port)
         {
-            _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            if (Hook.ProtocolType == "UDP") _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            else { _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Tcp); }
             _socket.Bind(new IPEndPoint(IPAddress.Parse(address), port));
             Receive();
         }
 
         public void Client(string address, int port)
         {
-            _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            if (Hook.ProtocolType == "UDP") _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            else { _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Tcp); }
             _socket.Connect(IPAddress.Parse(address), port);
             Receive();
         }
